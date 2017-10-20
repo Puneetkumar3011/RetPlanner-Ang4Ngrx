@@ -1,5 +1,9 @@
 # RetPlanner
 
+Implemented this project to demonstrate how to build enterprise application in Angular-4 and Ngrx. 
+I also have demonstrated how to create feature modules and lazy loading. 
+It also have directives and pipes.
+
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
 
 ## Development server

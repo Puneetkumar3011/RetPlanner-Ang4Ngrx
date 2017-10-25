@@ -40,7 +40,7 @@ export class BlogActions{
         }
     }
 
-    deleteBlog(blogId: number){
+    deleteBlog(blogId: string){
         return{
             type: BlogActions.DELETE_BLOG,
             payload: blogId

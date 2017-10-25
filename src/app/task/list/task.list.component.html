@@ -1,0 +1,30 @@
+<div class="divList">
+    <div class="row" style="min-height: 7rem;" *ngFor="let task of tasks">
+        <div style="background-color: #d9dce0; min-height: 6rem;font-weight: 400;position: relative">
+            <div>
+                <span class="col-sm-7">{{task.description}}</span>
+                <span class="col-sm-2">{{task.taskStatus}}</span>
+                <span class="col-sm-3">{{task.createdOn | date:'MM/dd/yy' | uppercase}}</span>
+            </div>
+            <div style="position: absolute; bottom:0;">
+                <span class="col-sm-1">
+                    <i style="cursor: pointer" (click)="editTask(task)" class="glyphicon glyphicon-edit" 
+                        title="Click to edit task"></i>
+                </span>
+                <span class="col-sm-1">
+                    <i style="cursor: pointer" (click)="deleteTask(task._id)" class="glyphicon glyphicon-trash" 
+                        title="Click to delete task"></i>
+                </span>
+                <span class="col-sm-1">
+                    <i *ngIf="task.taskStatus == 'Pending'" style="cursor: pointer" (click)="showCompleteModal(task)" 
+                        class="glyphicon glyphicon-ok" title="Click to complete task"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <a routerLink="/task/input">Create New Task</a>
+        </div>
+  </div>
+</div>

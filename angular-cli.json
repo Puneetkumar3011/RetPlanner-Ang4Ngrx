@@ -56,6 +56,9 @@
       "style": false,
       "template": false
     },
+    "map":{
+      "lodash": "node_modules/lodash/lodash.js"
+    },
     "spec": {
       "class": false,
       "component": true,

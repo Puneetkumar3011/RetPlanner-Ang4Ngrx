@@ -1,7 +1,7 @@
 <div *ngFor="let blog of blogs$ | async">
     <div class="row form-group has-success">
         <span class="col-md-2 control-label">
-            <span style="cursor: pointer" (click)="editClick(blog.id)" >{{blog.id}}</span>
+            <span style="cursor: pointer" (click)="editClick(blog.id)" >{{blog.id | rpShortenLength : 5}}</span>
         </span>
         <span class="col-md-3 control-label" title="{{blog.title | rpTitle}}">{{blog.title | rpTitle | rpShortenLength : 10}}</span>
         <span class="col-md-7 control-label" title="{{blog.content}}">{{blog.content | rpShortenLength: 30:'more'}}</span>

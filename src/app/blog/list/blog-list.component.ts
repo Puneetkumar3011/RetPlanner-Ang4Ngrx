@@ -31,7 +31,7 @@ export class BlogListComponent implements OnInit {
         });
     }
 
-    editClick(id: number): void{
+    editClick(id: string): void{
         this.router.navigate(["/blog/input", id], {relativeTo: this.activatedRoute})
     }
 

@@ -7,6 +7,7 @@ import { BlogService } from "app/blog/blog.service";
 import { BlogActions } from "app/store/actions/blog.actions";
 import { TaskService } from "../task/task.service";
 import { TaskActions } from "app/store/actions/task.actions";
+import { ContextActions } from "app/store/actions/context.actions";
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { TaskActions } from "app/store/actions/task.actions";
         TaskService,
         BlogActions,
         TaskActions,
+        ContextActions,
         AppActions,
         { provide: Dispatcher, useClass: AppDispacther }
     ]

@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Store } from "@ngrx/store";
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 import { TaskModel } from '../task.model';
 import { TaskActions } from '../../store/actions/task.actions';
@@ -15,14 +16,18 @@ import { AppActions } from "../../store/app.dispatcher";
 })
 
 export class TaskInputComponent implements OnInit, OnDestroy {
+/** variable declaration */    
     taskForm: FormGroup;
     taskData: TaskModel;
     isIdHidden: boolean = true;
     taskStatus: string = 'Pending';
-    private subForParam: any;
+    subForParam: any;
+    addTaskSubs: Subscription;
+
+/** contructor logic */
     constructor(private router : Router, private actRouter: ActivatedRoute, private taskActions: TaskActions,
     private store: Store<AppState>, private appActions: AppActions) {
-      this.appActions.ofType(TaskActions.ADD_TASK_SUCCESS)
+      this.addTaskSubs = this.appActions.ofType(TaskActions.ADD_TASK_SUCCESS)
       .subscribe(
         (result) => {
             this.router.navigate(['/task/list'], { relativeTo: this.actRouter });
@@ -33,6 +38,7 @@ export class TaskInputComponent implements OnInit, OnDestroy {
       )
     }
 
+/** angular life cycle events */
     ngOnInit() {
       this.setFormInputFields();
       this.subForParam = this.actRouter.params.subscribe((params) => {
@@ -41,18 +47,15 @@ export class TaskInputComponent implements OnInit, OnDestroy {
           this.getTaskDetail(taskId);
         }
       });
-      //this.throwErrorTest();
     }
 
-    getTaskDetail(taskId: string){
-      // this.taskService.getTask(taskId)
-      //   .subscribe((task: any) => { 
-      //       this.taskData = task; 
-      //       this.taskData.id = task._id;
-      //       this.setFormInputFields();
-      //   });
+    ngOnDestroy() {
+      this.subForParam.unsubscribe();
+      this.addTaskSubs.unsubscribe();
     }
 
+
+/** private methods */
     setFormInputFields() : void{
       this.taskForm = new FormGroup({
             id: new FormControl(this.taskData ? this.taskData.id : null),
@@ -84,29 +87,16 @@ export class TaskInputComponent implements OnInit, OnDestroy {
       this.store.dispatch(this.taskActions.addTask(task));
     }
 
-    updateTask(task: TaskModel){
-      // this.taskService.updateTask(task).subscribe(
-      //   (result) => {
-      //     if(result.ok){
-      //       this.router.navigate(['/task'], { relativeTo: this.actRouter });
-      //     }
-      //   },
-      //   (err) => {
-      //     console.log(err);
-      //   }
-      // )
-    }
-
-    private throwErrorTest(){
-      throw new Error('Created this error to demonstrate error handling');
-    }
-
     cancelEdit(){
       this.router.navigate(['/task'], { relativeTo: this.actRouter });
     }
 
-    ngOnDestroy() {
-      this.subForParam.unsubscribe();
+    updateTask(task: TaskModel){ }
+    
+    getTaskDetail(id){}
+
+    private throwErrorTest(){
+      throw new Error('Created this error to demonstrate error handling');
     }
 
 }

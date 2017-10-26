@@ -1,7 +1,6 @@
 import { Routes, RouterModule } from "@angular/router";
 
 import { HomeComponent } from "./home/home.component";
-import { BlogComponent } from "./blog/blog.component";
 
 const APP_ROUTES : Routes = [
     {path: "", component : HomeComponent, pathMatch: "full"},

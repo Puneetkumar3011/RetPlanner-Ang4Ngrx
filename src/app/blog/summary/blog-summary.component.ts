@@ -32,7 +32,6 @@ export class BlogSummaryComponent implements OnInit, OnDestroy{
 
     ngOnDestroy(){
         this.blogSubscriber.unsubscribe();
-        console.log("unsubscribed blog");
     }
 
 }

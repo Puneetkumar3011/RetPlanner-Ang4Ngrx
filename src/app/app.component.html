@@ -26,19 +26,30 @@
   </nav>
 </div>
 </div>
-
-  <div>
-    <div class="row">
-      <div style="background-color: #fdf7f707" class="col-md-3">
-          <ul class="nav nav-sidebar">
-              <li><a routerLink="/home" routerLinkActive="active-link">Home</a></li>
-              <li><a routerLink="/blog" routerLinkActive="active-link">Blog</a></li>
-              <li><a routerLink="/task" routerLinkActive="active-link">Task</a></li>
-          </ul>
-      </div>
-      <div style="background-color: #fdf7f7e1" class="col-md-9">
-          <router-outlet></router-outlet>
-      </div>
+<div class="context">
+  <div class="row" >
+    <div class="col-md-offset-8 col-md-4" >
+      Task in context: {{selectedTask? selectedTask.description: 'None'}}
     </div>
   </div>
+  <div class="row" >
+    <div class="col-md-offset-8 col-md-4" >
+      Blog in context: {{selectedBlog? selectedBlog.title: 'None'}}
+    </div>
+  </div>
+</div>
+<div>
+  <div class="row">
+    <div style="background-color: #fdf7f707" class="col-md-2">
+        <ul class="nav nav-sidebar">
+            <li><a routerLink="/home" routerLinkActive="active-link">Home</a></li>
+            <li><a routerLink="/blog" routerLinkActive="active-link">Blog</a></li>
+            <li><a routerLink="/task" routerLinkActive="active-link">Task</a></li>
+        </ul>
+    </div>
+    <div style="background-color: #fdf7f7e1" class="col-md-10">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
 </div>

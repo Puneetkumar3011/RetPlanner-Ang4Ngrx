@@ -3,9 +3,10 @@ import { compose } from '@ngrx/core/compose';
 
 import { BlogReducer } from "./blog.reducer";
 import { TaskReducer } from "./task.reducers";
-import { Blog } from "../../blog/blog.model";
+import { ContextReducers } from "../reducers/context.reducers";
 
 export default compose(combineReducers)({
     blog: BlogReducer,
-    task: TaskReducer
+    task: TaskReducer,
+    context: ContextReducers
 }); 

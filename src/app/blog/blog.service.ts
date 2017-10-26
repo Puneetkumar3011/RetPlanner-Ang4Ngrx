@@ -9,6 +9,7 @@ import { Blog } from "./blog.model";
 
 @Injectable()
 export class BlogService {
+  blogInContext: Blog;
   headers = new Headers(
     {'Content-Type': 'application/json',
         'Accept': 'application/json'

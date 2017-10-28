@@ -8,8 +8,8 @@ import { AppState } from "../../store/app.state";
 import { TaskActions } from "../../store/actions/task.actions";
 import { ContextActions } from "../../store/actions/context.actions";
 import { TaskModel } from '../task.model';
-import { TaskService } from '../task.service';
-import { AppActions } from 'app/store/app.dispatcher';
+import { AppActions } from '../../store/app.dispatcher';
+import { TaskStatusTypes } from "../../app.constants";
 
 @Component({
   selector: 'app-task-list',
@@ -26,18 +26,24 @@ export class TaskListComponent implements OnInit, OnDestroy {
     completeMsg: string;
     loadTaskSubs: Subscription;
     contextSubs: Subscription;
+    updateTaskSubs: Subscription;
     deleteTaskSubs: Subscription;
+    taskTypes = TaskStatusTypes;
 
 /** contructor logic */
     constructor(private store: Store<AppState>, private router: Router, private actRouter: ActivatedRoute, 
-      private contextActions: ContextActions, private taskActions: TaskActions, private taskService: TaskService, 
-      private actions : AppActions) {
+      private contextActions: ContextActions, private taskActions: TaskActions, private actions : AppActions) {
         this.deleteTaskSubs = actions.ofType(TaskActions.DELETE_TASK_SUCCESS)
         .subscribe(() => {
               console.log("Task Deleted");
             },
             (err) => console.log()
         );
+
+        this.updateTaskSubs = actions.ofType(TaskActions.UPDATE_TASK_SUCCESS)
+        .subscribe((res) => {
+          console.log("Task Updated");
+        });
        }
 
 /** angular life cycle events */
@@ -48,6 +54,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(){
       this.loadTaskSubs.unsubscribe();
+      this.updateTaskSubs.unsubscribe();
       this.deleteTaskSubs.unsubscribe();
       this.contextSubs.unsubscribe();
     }
@@ -72,25 +79,16 @@ export class TaskListComponent implements OnInit, OnDestroy {
     }
 
     editTask(task): void{
-      this.router.navigate(['input', task._id], { relativeTo: this.actRouter });
+      this.router.navigate(['/task/input', task._id], { relativeTo: this.actRouter });
     }
 
     deleteTask(taskId): void{
       this.store.dispatch(this.taskActions.deleteTask(taskId));
     }
 
-    updateTask(){
-      this.taskToComplete.taskStatus = 'Completed';
-      this.taskService.updateTask(this.taskToComplete).subscribe(
-        (result) => {
-          if(result.ok){
-            this.router.navigate(['/task'], { relativeTo: this.actRouter });
-          }
-        },
-        (err) => {
-          console.log(err);
-        }
-      )
+    updateTask(task: TaskModel){
+      task.taskStatus = TaskStatusTypes.Completed;
+      this.store.dispatch(this.taskActions.updateTask(task));
     }
 
     changeStyle($event, task){

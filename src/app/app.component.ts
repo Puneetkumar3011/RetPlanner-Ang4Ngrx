@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { TaskModel } from 'app/task/task.model';
-import { Blog } from 'app/blog/blog.model';
-import { ContextActions } from 'app/store/actions/context.actions';
+import { TaskModel } from './task/task.model';
+import { Blog } from './blog/blog.model';
+import { ContextActions } from './store/actions/context.actions';
 import { Store } from '@ngrx/store';
-import { AppState } from 'app/store/app.state';
+import { AppState } from './store/app.state';
 
 @Component({
   selector: 'app-root',

@@ -28,6 +28,16 @@ export class TaskEffects{
         return this.taskSvc.addTask(task);
     })
     .map(task => this.taskActions.addTaskSuccess(task))
+    .catch((err) => Observable.throw(err));
+
+    @Effect() updateTask$ = this.update$
+    .ofType(TaskActions.UPDATE_TASK)
+    .map(action => action.payload)
+    .switchMap(task => 
+        { 
+        return this.taskSvc.updateTask(task);
+    })
+    .map(task => this.taskActions.updateTaskSuceess(task))
     .catch((err) => Observable.throw(err))
 
     @Effect() deleteTask$ = this.update$

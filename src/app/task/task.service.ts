@@ -5,7 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { TaskModel } from './task.model';
-import { WebAPI } from "../app.enum";
+import { WebAPI } from "../app.constants";
 
 @Injectable()
 export class TaskService {

@@ -1,5 +1,5 @@
-<div class="divList">
-    <div class="row" style="min-height: 7rem;" *ngFor="let task of tasks;let index = index;let isOdd = odd;let isEven = even;">
+<div>
+    <div style="min-height: 7rem;" *ngFor="let task of tasks;let index = index;let isOdd = odd;let isEven = even;">
         <div class="row form-group has-success" [class.rowOdd]="isOdd" [class.rowEven]="isEven" 
         [class.rowSelected]="taskInContext && task.id === taskInContext.id" (click)="setTaskContext(task)">
             <div>
@@ -17,14 +17,14 @@
                         title="Click to delete task"></i>
                 </span>
                 <span class="col-sm-1">
-                    <i *ngIf="task.taskStatus == 'Pending'" style="cursor: pointer" (click)="showCompleteModal(task)" 
+                    <i *ngIf="task.taskStatus == taskTypes.Pending" style="cursor: pointer" (click)="updateTask(task)" 
                         class="glyphicon glyphicon-ok" title="Click to complete task"></i>
                 </span>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12" style="text-align: left;">
             <a routerLink="/task/input">Create New Task</a>
         </div>
   </div>

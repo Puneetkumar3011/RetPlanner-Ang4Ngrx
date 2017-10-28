@@ -1,5 +1,5 @@
 <div class="divList">
-    <div class="row" style="min-height: 7rem;" *ngFor="let blog of blogs$ | async;let index = index;let isOdd = odd;let isEven = even;">
+    <div style="min-height: 7rem;" *ngFor="let blog of blogs$ | async;let index = index;let isOdd = odd;let isEven = even;">
         <div class="row form-group has-success" [ngClass] = "getRowCssClass(isOdd, isEven, blog)" (click)="setBlogInContext(blog)">
             <span class="col-md-2 control-label">
                 <span style="cursor: pointer" (click)="editClick(blog.id)" >{{blog.id | rpShortenLength : 5}}</span>

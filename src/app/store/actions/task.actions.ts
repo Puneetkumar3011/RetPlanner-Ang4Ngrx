@@ -9,6 +9,8 @@ export class TaskActions{
     static LOAD_TASK_SUCCESS = "LOAD_TASK_SUCCESS";
     static ADD_TASK = "ADD_TASK";
     static ADD_TASK_SUCCESS = "ADD_TASK_SUCCESS";
+    static UPDATE_TASK = "UPDATE_TASK";
+    static UPDATE_TASK_SUCCESS = "UPDATE_TASK_SUCCESS";
     static DELETE_TASK = "DELETE_TASK";
     static DELETE_TASK_SUCCESS = "DELETE_TASK_SUCCESS";
 
@@ -28,6 +30,20 @@ export class TaskActions{
     addTask(task: TaskModel): Action{
         return{
             type: TaskActions.ADD_TASK,
+            payload: task
+        }
+    }
+
+    updateTask(task: TaskModel){
+        return{
+            type: TaskActions.UPDATE_TASK,
+            payload: task
+        }
+    }
+
+    updateTaskSuceess(task: TaskModel){
+        return{
+            type: TaskActions.UPDATE_TASK_SUCCESS,
             payload: task
         }
     }

@@ -1,12 +1,10 @@
 <div>
-  <div class="row" style="text-align: left;">
-      <div class="col-md-9">
-        <router-outlet></router-outlet>
-      </div>
+  <div>
+      <router-outlet></router-outlet>  
   </div>
-  <div class="row">
-    <ret-blog-summ class="col-md-3"></ret-blog-summ>
-    <ul class="list-inline">
+  <div>
+    <ret-blog-summ class="col-md-4"></ret-blog-summ>
+    <ul class="list-inline" style="text-align: right">
         <li><a routerLink="/blog/list">Blog List</a></li>
         <li><a routerLink="/blog/input">New Blog</a></li>
     </ul>

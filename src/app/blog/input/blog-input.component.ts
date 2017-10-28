@@ -9,6 +9,7 @@ import { AppActions } from "../../store/app.dispatcher";
 import { BlogActions } from "../../store/actions/blog.actions";
 import { Blog } from "../blog.model";
 import { AppState } from "../../store/app.state";
+import { BlogCategories } from "../../app.constants";
 
 @Component({
     selector: "ret-blog-input",
@@ -19,6 +20,7 @@ export class BlogInputComponent implements OnInit, OnDestroy {
     blogForm: FormGroup;
     blogData: Blog;
     subForParam: any;
+    categoryTypes = BlogCategories;
     getSubsription: Subscription; 
     addSubsription: Subscription; 
     deleteSubsription: Subscription;
@@ -60,7 +62,7 @@ export class BlogInputComponent implements OnInit, OnDestroy {
                 id: this.blogForm.value.id,
                 title: this.blogForm.value.title,
                 content: this.blogForm.value.content,
-                categories : "Computer"
+                categories : this.blogForm.value.categories
             };
             this.store.dispatch(this.blogActions.addBlog(blog));
         }
@@ -101,7 +103,7 @@ export class BlogInputComponent implements OnInit, OnDestroy {
         this.blogForm = new FormGroup({
             id: new FormControl(this.blogData ? this.blogData.id : null, [Validators.required]),
             title: new FormControl(this.blogData ? this.blogData.title : null, [Validators.required]),
-            categories: new FormControl(this.blogData ? this.blogData.categories : null),
+            categories: new FormControl(this.blogData ? this.blogData.categories : this.categoryTypes[0]),
             content: new FormControl(this.blogData ? this.blogData.content : null, Validators.required)
         });
     }

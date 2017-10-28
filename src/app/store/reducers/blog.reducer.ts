@@ -3,7 +3,9 @@ import { BlogActions } from "../actions/blog.actions";
 
 import { Blog } from "../../blog/blog.model";
 
-export function BlogReducer(state : Array<Blog> = [], action: Action){
+export const InitialState : Array<Blog> = [];
+
+export function BlogReducer(state : Array<Blog> = InitialState, action: Action) : Array<Blog>{
 
     switch(action.type){
         case BlogActions.LOAD_BLOG_SUCCESS:{

@@ -11,6 +11,12 @@ export function TaskReducer(state : Array<TaskModel> = [], action: Action){
         case TaskActions.ADD_TASK_SUCCESS: {
             return [...state,action.payload];
         }
+        case TaskActions.UPDATE_TASK_SUCCESS:{
+            let newState = state.map((task) =>{
+                return (task.id === action.payload.id)? Object.assign({}, task, action.payload): task;
+            });
+            return newState;
+        }
         case TaskActions.DELETE_TASK_SUCCESS: {
             let newState = state.filter((task) =>{
                 return task.id !== action.payload.id;

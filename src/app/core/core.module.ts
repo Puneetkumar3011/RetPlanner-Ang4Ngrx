@@ -1,15 +1,21 @@
-import { NgModule } from "@angular/core";
+import { NgModule, ErrorHandler } from "@angular/core";
 import { StoreModule, Dispatcher } from '@ngrx/store';
 import { AppActions, AppDispacther } from "../store/app.dispatcher";
 
 import reducer from "../store/reducers/app.reducers";
-import { BlogService } from "app/blog/blog.service";
-import { BlogActions } from "app/store/actions/blog.actions";
+import { BlogActions } from "../store/actions/blog.actions";
 import { TaskService } from "../task/task.service";
-import { TaskActions } from "app/store/actions/task.actions";
-import { ContextActions } from "app/store/actions/context.actions";
+import { TaskActions } from "../store/actions/task.actions";
+import { ContextActions } from "../store/actions/context.actions";
+import { BlogService } from "../blog/blog.service";
+import { GlobalErrorHandler } from "./app.globalerrorhandler";
+import { LogService } from "./log.service";
+import { ErrorComponent } from "../error/error.component";
 
 @NgModule({
+    declarations: [
+        ErrorComponent,
+    ],
     imports: [
         StoreModule.provideStore(reducer)
     ],
@@ -19,8 +25,10 @@ import { ContextActions } from "app/store/actions/context.actions";
         BlogActions,
         TaskActions,
         ContextActions,
+        LogService,
         AppActions,
-        { provide: Dispatcher, useClass: AppDispacther }
+        { provide: Dispatcher, useClass: AppDispacther },
+        { provide: ErrorHandler, useClass: GlobalErrorHandler }
     ]
 })
 export class RetCoreModule{

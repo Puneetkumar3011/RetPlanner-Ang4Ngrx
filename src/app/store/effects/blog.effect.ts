@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Effect, Actions} from '@ngrx/effects';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/throw';
 
 import { BlogActions } from "../actions/blog.actions";
 import { BlogService } from "../../blog/blog.service";
@@ -18,7 +19,9 @@ export class BlogEffects{
     .map(blogs => { 
         return this.blogActions.loadBlogSuccess(blogs); 
     })
-    .catch((err) => Observable.throw(err));
+    .catch((err) => { 
+        return Observable.throw(err);
+    });
 
     @Effect() addBlog$ = this.update$
     .ofType(BlogActions.ADD_BLOG)

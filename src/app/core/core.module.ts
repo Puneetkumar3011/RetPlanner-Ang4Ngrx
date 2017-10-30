@@ -11,6 +11,7 @@ import { BlogService } from "../blog/blog.service";
 import { GlobalErrorHandler } from "./app.globalerrorhandler";
 import { LogService } from "./log.service";
 import { ErrorComponent } from "../error/error.component";
+import { ApiService } from "./core-api.service";
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { ErrorComponent } from "../error/error.component";
         ContextActions,
         LogService,
         AppActions,
+        ApiService,
         { provide: Dispatcher, useClass: AppDispacther },
         { provide: ErrorHandler, useClass: GlobalErrorHandler }
     ]

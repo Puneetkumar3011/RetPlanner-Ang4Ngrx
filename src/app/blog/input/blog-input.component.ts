@@ -101,7 +101,7 @@ export class BlogInputComponent implements OnInit, OnDestroy {
 
     private initializeForm(){
         this.blogForm = new FormGroup({
-            id: new FormControl(this.blogData ? this.blogData.id : null, [Validators.required]),
+            id: new FormControl(this.blogData ? this.blogData.id : null),
             title: new FormControl(this.blogData ? this.blogData.title : null, [Validators.required]),
             categories: new FormControl(this.blogData ? this.blogData.categories : this.categoryTypes[0]),
             content: new FormControl(this.blogData ? this.blogData.content : null, Validators.required)

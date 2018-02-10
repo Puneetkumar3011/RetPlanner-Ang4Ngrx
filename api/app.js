@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 
 /** routes definition */
 var taskRoutes = require('./routes/task/app');
+var blogRoutes = require('./routes/blog/app');
 var errRoutes = require('./routes/error/app');
 
 var app = express();
@@ -25,6 +26,7 @@ app.use(function (req, res, next) {
 });
 // routes
 app.use('/api/task', taskRoutes);
+app.use('/api/blog', blogRoutes);
 app.use('/api/error', errRoutes);
 
 // catch 404 and forward to error handler
